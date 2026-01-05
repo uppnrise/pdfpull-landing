@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try pdfpull - PDF Extraction Playground</title>
+    <meta name="description" content="Try pdfpull for free. Upload a PDF and extract text, tables, or use OCR instantly.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
+    
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .drop-zone {
+            border: 2px dashed #d1d5db;
+            transition: all 0.3s ease;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #667eea;
+            background: #f5f3ff;
+        }
+        .code-block {
+            background: #1e1e1e;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased min-h-screen">
+    
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-100">
+        <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2">
+                <span class="text-2xl">📄</span>
+                <span class="font-bold text-xl">pdfpull</span>
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="https://pdfpull-895295000838.europe-west1.run.app/docs" target="_blank" class="text-gray-600 hover:text-gray-900">API Docs</a>
+                <a href="index.html#waitlist" class="gradient-bg text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition">
+                    Join Waitlist
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold mb-3">Try pdfpull</h1>
+            <p class="text-gray-600">Upload a PDF and see the extraction in action. No signup required.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-8">
+            <!-- Upload Area -->
+            <div 
+                id="drop-zone" 
+                class="drop-zone rounded-xl p-12 text-center cursor-pointer mb-6"
+                onclick="document.getElementById('file-input').click()"
+            >
+                <input type="file" id="file-input" accept=".pdf" class="hidden">
+                <div id="upload-prompt">
+                    <div class="text-5xl mb-4">📄</div>
+                    <p class="text-lg font-medium text-gray-700">Drop your PDF here</p>
+                    <p class="text-gray-500">or click to browse</p>
+                </div>
+                <div id="file-info" class="hidden">
+                    <div class="text-5xl mb-4">✅</div>
+                    <p class="text-lg font-medium text-gray-700" id="file-name"></p>
+                    <p class="text-gray-500" id="file-size"></p>
+                </div>
+            </div>
+
+            <!-- Options -->
+            <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                <div class="flex-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Extraction Type</label>
+                    <select id="extract-type" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none">
+                        <option value="text">📄 Text Extraction</option>
+                        <option value="tables">📊 Table Extraction</option>
+                        <option value="metadata">ℹ️ Metadata</option>
+                        <option value="ocr">🔍 OCR (Scanned PDFs)</option>
+                    </select>
+                </div>
+                <div class="flex-1" id="pages-container">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Pages (optional)</label>
+                    <input 
+                        type="text" 
+                        id="pages" 
+                        placeholder="e.g., 1,2,3 or 1-5"
+                        class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none"
+                    >
+                </div>
+            </div>
+
+            <!-- Extract Button -->
+            <button 
+                id="extract-btn"
+                onclick="extractPDF()"
+                disabled
+                class="w-full gradient-bg text-white px-6 py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+                Extract Now
+            </button>
+
+            <!-- Loading -->
+            <div id="loading" class="hidden mt-6 text-center">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-purple-500 border-t-transparent"></div>
+                <p class="mt-2 text-gray-600">Processing your PDF...</p>
+            </div>
+
+            <!-- Error -->
+            <div id="error" class="hidden mt-6 bg-red-50 text-red-700 p-4 rounded-xl">
+                <p class="font-medium">Error</p>
+                <p id="error-message" class="text-sm"></p>
+            </div>
+
+            <!-- Result -->
+            <div id="result" class="hidden mt-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-semibold text-gray-700">Result</h3>
+                    <button onclick="copyResult()" class="text-sm text-purple-600 hover:text-purple-800 font-medium">
+                        📋 Copy
+                    </button>
+                </div>
+                <div class="code-block rounded-xl p-4 overflow-x-auto max-h-96 overflow-y-auto">
+                    <pre id="result-content" class="text-sm text-gray-300 font-mono whitespace-pre-wrap"></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info -->
+        <div class="mt-8 grid sm:grid-cols-3 gap-4 text-center">
+            <div class="bg-white rounded-xl p-4">
+                <p class="text-2xl mb-1">🔒</p>
+                <p class="text-sm text-gray-600">Files are not stored</p>
+            </div>
+            <div class="bg-white rounded-xl p-4">
+                <p class="text-2xl mb-1">⚡</p>
+                <p class="text-sm text-gray-600">Demo limit: 10 req/hour</p>
+            </div>
+            <div class="bg-white rounded-xl p-4">
+                <p class="text-2xl mb-1">📦</p>
+                <p class="text-sm text-gray-600">Max file size: 10MB</p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-12 text-center bg-white rounded-2xl p-8">
+            <h2 class="text-xl font-bold mb-2">Need more?</h2>
+            <p class="text-gray-600 mb-4">Join the waitlist for full API access with higher limits.</p>
+            <a href="index.html#waitlist" class="inline-block gradient-bg text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition">
+                Join Waitlist →
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 text-center text-gray-500 text-sm">
+        <p>© 2025 pdfpull. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const API_URL = 'https://pdfpull-895295000838.europe-west1.run.app';
+        const DEMO_KEY = 'sk_demo_123456789';
+        
+        let selectedFile = null;
+
+        // File input handling
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const extractBtn = document.getElementById('extract-btn');
+
+        // Drag and drop
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type === 'application/pdf') {
+                handleFile(file);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            if (file.size > 10 * 1024 * 1024) {
+                showError('File too large. Max size is 10MB.');
+                return;
+            }
+            
+            selectedFile = file;
+            
+            document.getElementById('upload-prompt').classList.add('hidden');
+            document.getElementById('file-info').classList.remove('hidden');
+            document.getElementById('file-name').textContent = file.name;
+            document.getElementById('file-size').textContent = formatSize(file.size);
+            
+            extractBtn.disabled = false;
+            
+            // Hide previous results
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        async function extractPDF() {
+            if (!selectedFile) return;
+
+            const extractType = document.getElementById('extract-type').value;
+            const pages = document.getElementById('pages').value;
+
+            // Show loading
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+            extractBtn.disabled = true;
+
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            if (pages) {
+                formData.append('pages', pages);
+            }
+
+            // Determine endpoint
+            let endpoint = '/api/v1/extract/';
+            switch (extractType) {
+                case 'text': endpoint += 'text'; break;
+                case 'tables': endpoint += 'tables'; break;
+                case 'metadata': endpoint += 'metadata'; break;
+                case 'ocr': endpoint += 'ocr'; break;
+            }
+
+            try {
+                const response = await fetch(API_URL + endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'X-API-Key': DEMO_KEY,
+                    },
+                    body: formData,
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || data.detail?.error || 'Extraction failed');
+                }
+
+                // Show result
+                document.getElementById('result-content').textContent = JSON.stringify(data, null, 2);
+                document.getElementById('result').classList.remove('hidden');
+
+            } catch (err) {
+                showError(err.message);
+            } finally {
+                document.getElementById('loading').classList.add('hidden');
+                extractBtn.disabled = false;
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('error-message').textContent = message;
+            document.getElementById('error').classList.remove('hidden');
+        }
+
+        function copyResult() {
+            const content = document.getElementById('result-content').textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('Copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>
