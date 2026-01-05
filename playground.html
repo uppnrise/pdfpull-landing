@@ -86,6 +86,10 @@
                         <option value="text">📄 Text Extraction</option>
                         <option value="tables">📊 Table Extraction</option>
                         <option value="metadata">ℹ️ Metadata</option>
+                        <option value="info">📋 Full Info (word count, links, images)</option>
+                        <option value="links">🔗 Extract Links</option>
+                        <option value="images">🖼️ Extract Images</option>
+                        <option value="pages-to-images">📸 PDF to Images</option>
                         <option value="ocr" disabled>🔍 OCR - Coming Soon</option>
                     </select>
                 </div>
@@ -249,12 +253,16 @@
             }
 
             // Determine endpoint
-            let endpoint = '/api/v1/extract/';
+            let endpoint = '/api/v1/';
             switch (extractType) {
-                case 'text': endpoint += 'text'; break;
-                case 'tables': endpoint += 'tables'; break;
-                case 'metadata': endpoint += 'metadata'; break;
-                case 'ocr': endpoint += 'ocr'; break;
+                case 'text': endpoint += 'extract/text'; break;
+                case 'tables': endpoint += 'extract/tables'; break;
+                case 'metadata': endpoint += 'extract/metadata'; break;
+                case 'info': endpoint += 'extract/info'; break;
+                case 'links': endpoint += 'extract/links'; break;
+                case 'images': endpoint += 'extract/images'; break;
+                case 'pages-to-images': endpoint += 'convert/pages-to-images'; break;
+                case 'ocr': endpoint += 'extract/ocr'; break;
             }
 
             try {
