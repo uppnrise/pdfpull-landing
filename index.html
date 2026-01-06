@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pdfpull - Extract text, tables & data from any PDF</title>
-    <meta name="description" content="Simple PDF extraction API for developers. Extract text, tables, metadata, and OCR from PDFs with a single API call.">
+    <title>pdfpull - Smart PDF Parser API for Invoices & Resumes</title>
+    <meta name="description" content="Extract structured data from invoices and resumes with AI-powered parsing. Simple API for developers.">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="pdfpull - PDF Extraction API">
-    <meta property="og:description" content="Extract text, tables & data from any PDF. Simple API for developers.">
+    <meta property="og:title" content="pdfpull - Smart PDF Parser API">
+    <meta property="og:description" content="Extract structured data from invoices and resumes. Simple API for developers.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://uppnrise.github.io/pdfpull">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="pdfpull - PDF Extraction API">
-    <meta name="twitter:description" content="Extract text, tables & data from any PDF. Simple API for developers.">
+    <meta name="twitter:title" content="pdfpull - Smart PDF Parser API">
+    <meta name="twitter:description" content="Extract structured data from invoices and resumes. Simple API for developers.">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,6 +36,13 @@
         .code-block {
             background: #1e1e1e;
         }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900 antialiased">
@@ -48,6 +55,7 @@
                 <span class="font-bold text-xl">pdfpull</span>
             </div>
             <div class="flex items-center gap-6">
+                <a href="#smart-parsers" class="text-gray-600 hover:text-gray-900 hidden sm:block">Smart Parsers</a>
                 <a href="#features" class="text-gray-600 hover:text-gray-900 hidden sm:block">Features</a>
                 <a href="#pricing" class="text-gray-600 hover:text-gray-900 hidden sm:block">Pricing</a>
                 <a href="playground.html" class="text-gray-600 hover:text-gray-900 hidden sm:block">Try It</a>
@@ -63,169 +71,269 @@
     <section class="pt-32 pb-20 px-6">
         <div class="max-w-4xl mx-auto text-center">
             <div class="inline-block mb-6 px-4 py-2 bg-purple-50 rounded-full text-purple-700 text-sm font-medium">
-                🚀 Now in Beta - Try it free
+                🚀 NEW: Invoice & Resume Parsers with Multi-Language Support
             </div>
             <h1 class="text-5xl sm:text-6xl font-bold mb-6 leading-tight">
-                Extract <span class="gradient-text">text, tables & data</span> from any PDF
+                <span class="gradient-text">Smart PDF Parsing</span> for Invoices & Resumes
             </h1>
             <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-                Simple API for developers. No complex setup. Just upload a PDF and get structured data back. Works with scanned documents too.
+                Extract structured data from any invoice or resume. Get vendor info, amounts, dates, skills, experience — all as clean JSON. Supports English, German & Turkish.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#waitlist" class="gradient-bg text-white px-8 py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition shadow-lg shadow-purple-500/25">
-                    Join the Waitlist →
+                <a href="playground.html" class="gradient-bg text-white px-8 py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition shadow-lg shadow-purple-500/25">
+                    Try Demo Free →
                 </a>
-                <a href="playground.html" class="bg-gray-100 text-gray-800 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-200 transition">
-                    Try Demo
+                <a href="#smart-parsers" class="bg-gray-100 text-gray-800 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-200 transition">
+                    See Examples
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Parsers Section -->
+    <section id="smart-parsers" class="py-20 px-6 bg-gradient-to-b from-purple-50 to-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Smart Document Parsers</h2>
+                <p class="text-gray-600 text-lg">Upload a PDF, get structured data. It's that simple.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Invoice Parser -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <div class="gradient-bg p-6 text-white">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-3xl">🧾</span>
+                            <h3 class="text-2xl font-bold">Invoice Parser</h3>
+                        </div>
+                        <p class="text-purple-100">Extract vendor, amounts, dates & line items</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="code-block rounded-xl p-4 mb-4 overflow-x-auto">
+<pre class="text-xs text-gray-300 font-mono"><code>{
+  "vendor_name": "ACME Corp",
+  "invoice_number": "INV-2024-001",
+  "invoice_date": "January 15, 2024",
+  "total_amount": 2200.00,
+  "tax_amount": 200.00,
+  "currency": "USD",
+  "confidence": 0.95
+}</code></pre>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Vendor Info</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Amounts</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Dates</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Tax ID</span>
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            🌍 Supports: English, German, Turkish
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resume Parser -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-emerald-500 to-teal-500 p-6 text-white">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-3xl">📋</span>
+                            <h3 class="text-2xl font-bold">Resume Parser</h3>
+                        </div>
+                        <p class="text-emerald-100">Extract contact, skills, experience & education</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="code-block rounded-xl p-4 mb-4 overflow-x-auto">
+<pre class="text-xs text-gray-300 font-mono"><code>{
+  "full_name": "John Doe",
+  "email": "john@email.com",
+  "skills": ["Python", "AWS", "Docker"],
+  "work_experience": [...],
+  "education": [...],
+  "confidence": 0.90
+}</code></pre>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">Contact</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">Skills</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">Experience</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">Education</span>
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            🌍 Supports: English, German, Turkish
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="playground.html" class="inline-flex items-center gap-2 gradient-bg text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition">
+                    <span>Try Smart Parsers Now</span>
+                    <span>→</span>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Code Example -->
-    <section class="py-16 px-6 bg-gray-50">
+    <section class="py-16 px-6">
         <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-bold mb-2">One API Call, Structured Data</h2>
+                <p class="text-gray-600">Parse any invoice with a single request</p>
+            </div>
             <div class="code-block rounded-2xl p-6 overflow-x-auto shadow-2xl">
                 <div class="flex gap-2 mb-4">
                     <div class="w-3 h-3 rounded-full bg-red-500"></div>
                     <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div class="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
-<pre class="text-sm text-gray-300 font-mono"><code><span class="text-gray-500"># Extract text from any PDF</span>
-<span class="text-green-400">curl</span> -X POST <span class="text-yellow-300">"https://api.pdfpull.com/v1/extract/text"</span> \
+<pre class="text-sm text-gray-300 font-mono"><code><span class="text-gray-500"># Parse an invoice - get structured data</span>
+<span class="text-green-400">curl</span> -X POST <span class="text-yellow-300">"https://api.pdfpull.com/v1/parse/invoice"</span> \
   -H <span class="text-yellow-300">"X-API-Key: your_api_key"</span> \
-  -F <span class="text-yellow-300">"file=@invoice.pdf"</span>
+  -F <span class="text-yellow-300">"file=@invoice.pdf"</span> \
+  -F <span class="text-yellow-300">"language=en"</span>
 
 <span class="text-gray-500"># Response</span>
 {
-  <span class="text-purple-400">"text"</span>: <span class="text-yellow-300">"Invoice #12345\nDate: 2024-01-15\nTotal: $1,234.00"</span>,
-  <span class="text-purple-400">"page_count"</span>: <span class="text-blue-400">1</span>,
-  <span class="text-purple-400">"pages_extracted"</span>: <span class="text-blue-400">1</span>
+  <span class="text-purple-400">"vendor_name"</span>: <span class="text-yellow-300">"ACME Corporation"</span>,
+  <span class="text-purple-400">"invoice_number"</span>: <span class="text-yellow-300">"INV-2024-00123"</span>,
+  <span class="text-purple-400">"invoice_date"</span>: <span class="text-yellow-300">"January 15, 2024"</span>,
+  <span class="text-purple-400">"total_amount"</span>: <span class="text-blue-400">2200.00</span>,
+  <span class="text-purple-400">"currency"</span>: <span class="text-yellow-300">"USD"</span>,
+  <span class="text-purple-400">"confidence"</span>: <span class="text-blue-400">0.95</span>
 }</code></pre>
             </div>
         </div>
     </section>
 
-    <!-- Problem -->
-    <section class="py-20 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6">PDF parsing is painful 😩</h2>
-            <div class="grid md:grid-cols-3 gap-6 text-left">
-                <div class="p-6 bg-red-50 rounded-xl">
-                    <div class="text-2xl mb-3">🔧</div>
-                    <h3 class="font-semibold mb-2">Complex Libraries</h3>
-                    <p class="text-gray-600 text-sm">Installing PyPDF, Tesseract, Poppler... dependency hell.</p>
+    <!-- Use Cases -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Built for Real Use Cases</h2>
+                <p class="text-gray-600 text-lg">What developers are building with pdfpull</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="text-3xl mb-4">💰</div>
+                    <h3 class="font-semibold text-lg mb-2">Expense Tracking</h3>
+                    <p class="text-gray-600">Auto-extract vendor, amount, date from receipts & invoices. Automate expense reports.</p>
                 </div>
-                <div class="p-6 bg-red-50 rounded-xl">
-                    <div class="text-2xl mb-3">📑</div>
-                    <h3 class="font-semibold mb-2">Scanned PDFs Fail</h3>
-                    <p class="text-gray-600 text-sm">Regular text extraction returns nothing for scanned docs.</p>
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="text-3xl mb-4">👥</div>
+                    <h3 class="font-semibold text-lg mb-2">HR & Recruitment</h3>
+                    <p class="text-gray-600">Parse resumes at scale. Extract skills, experience, contact info for ATS systems.</p>
                 </div>
-                <div class="p-6 bg-red-50 rounded-xl">
-                    <div class="text-2xl mb-3">📊</div>
-                    <h3 class="font-semibold mb-2">Tables are Messy</h3>
-                    <p class="text-gray-600 text-sm">Extracting structured table data is a nightmare.</p>
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="text-3xl mb-4">📊</div>
+                    <h3 class="font-semibold text-lg mb-2">Accounting Automation</h3>
+                    <p class="text-gray-600">Process supplier invoices automatically. Extract line items, tax, totals.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features -->
-    <section id="features" class="py-20 px-6 bg-gray-50">
+    <section id="features" class="py-20 px-6">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Everything you need to extract PDF data</h2>
-                <p class="text-gray-600 text-lg">One API, all PDF extraction needs solved</p>
+                <h2 class="text-3xl font-bold mb-4">Plus All the Basics</h2>
+                <p class="text-gray-600 text-lg">Everything you need for PDF extraction</p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-2xl">📄</span>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">Text Extraction</h3>
-                    <p class="text-gray-600">Extract all text content with position info. Select specific pages.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gray-50 p-5 rounded-xl">
+                    <div class="text-2xl mb-3">📄</div>
+                    <h3 class="font-semibold mb-1">Text Extraction</h3>
+                    <p class="text-gray-600 text-sm">Extract all text with page selection</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-2xl">📊</span>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">Table Extraction</h3>
-                    <p class="text-gray-600">Get tables as structured JSON with headers and rows.</p>
+                <div class="bg-gray-50 p-5 rounded-xl">
+                    <div class="text-2xl mb-3">📊</div>
+                    <h3 class="font-semibold mb-1">Table Extraction</h3>
+                    <p class="text-gray-600 text-sm">Get tables as structured JSON</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-2xl">📸</span>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">PDF to Images</h3>
-                    <p class="text-gray-600">Convert PDF pages to high-quality PNG images.</p>
+                <div class="bg-gray-50 p-5 rounded-xl">
+                    <div class="text-2xl mb-3">📸</div>
+                    <h3 class="font-semibold mb-1">PDF to Images</h3>
+                    <p class="text-gray-600 text-sm">Convert pages to PNG (72-300 DPI)</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-2xl">🖼️</span>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">Extract Images</h3>
-                    <p class="text-gray-600">Extract embedded images from PDFs with metadata.</p>
+                <div class="bg-gray-50 p-5 rounded-xl">
+                    <div class="text-2xl mb-3">🖼️</div>
+                    <h3 class="font-semibold mb-1">Extract Images</h3>
+                    <p class="text-gray-600 text-sm">Get embedded images with metadata</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-2xl">🔗</span>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">Extract Links</h3>
-                    <p class="text-gray-600">Get all URLs and hyperlinks from your PDFs.</p>
+                <div class="bg-gray-50 p-5 rounded-xl">
+                    <div class="text-2xl mb-3">🔗</div>
+                    <h3 class="font-semibold mb-1">Extract Links</h3>
+                    <p class="text-gray-600 text-sm">Get all URLs from your PDFs</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-2xl">📋</span>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">Full PDF Info</h3>
-                    <p class="text-gray-600">Word count, character count, image count, and more.</p>
+                <div class="bg-gray-50 p-5 rounded-xl">
+                    <div class="text-2xl mb-3">📋</div>
+                    <h3 class="font-semibold mb-1">Full PDF Info</h3>
+                    <p class="text-gray-600 text-sm">Word count, page count, metadata</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-2xl">🔍</span>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">OCR Support</h3>
-                    <p class="text-gray-600">Scanned PDFs? Coming soon with 15+ languages.</p>
+                <div class="bg-gray-50 p-5 rounded-xl">
+                    <div class="text-2xl mb-3">🔍</div>
+                    <h3 class="font-semibold mb-1">OCR Support</h3>
+                    <p class="text-gray-600 text-sm">Scanned docs — Coming Soon</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
-                        <span class="text-2xl">⚡</span>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">Fast & Reliable</h3>
-                    <p class="text-gray-600">Powered by PyMuPDF. Process documents in milliseconds.</p>
+                <div class="bg-gray-50 p-5 rounded-xl">
+                    <div class="text-2xl mb-3">⚡</div>
+                    <h3 class="font-semibold mb-1">Fast & Reliable</h3>
+                    <p class="text-gray-600 text-sm">Powered by PyMuPDF</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How it Works -->
-    <section class="py-20 px-6">
+    <!-- Why Different -->
+    <section class="py-20 px-6 bg-gray-50">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Simple as 1-2-3</h2>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Why pdfpull?</h2>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="w-12 h-12 gradient-bg text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">1</div>
-                    <h3 class="font-semibold text-lg mb-2">Get API Key</h3>
-                    <p class="text-gray-600">Sign up and get your API key in seconds</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl">
+                    <div class="flex items-start gap-4">
+                        <div class="text-green-500 text-xl">✓</div>
+                        <div>
+                            <h3 class="font-semibold mb-1">No AI Costs</h3>
+                            <p class="text-gray-600 text-sm">Rule-based extraction. No GPT API fees. Predictable pricing.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <div class="w-12 h-12 gradient-bg text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">2</div>
-                    <h3 class="font-semibold text-lg mb-2">Upload PDF</h3>
-                    <p class="text-gray-600">Send your PDF to our API endpoint</p>
+                <div class="bg-white p-6 rounded-xl">
+                    <div class="flex items-start gap-4">
+                        <div class="text-green-500 text-xl">✓</div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Multi-Language</h3>
+                            <p class="text-gray-600 text-sm">English, German, Turkish support. More coming soon.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <div class="w-12 h-12 gradient-bg text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">3</div>
-                    <h3 class="font-semibold text-lg mb-2">Get Data</h3>
-                    <p class="text-gray-600">Receive structured JSON response instantly</p>
+                <div class="bg-white p-6 rounded-xl">
+                    <div class="flex items-start gap-4">
+                        <div class="text-green-500 text-xl">✓</div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Confidence Score</h3>
+                            <p class="text-gray-600 text-sm">Know how reliable the extraction is. Flag for review.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl">
+                    <div class="flex items-start gap-4">
+                        <div class="text-green-500 text-xl">✓</div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Developer-First</h3>
+                            <p class="text-gray-600 text-sm">Simple REST API. Great docs. Fast integration.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing -->
-    <section id="pricing" class="py-20 px-6 bg-gray-50">
+    <section id="pricing" class="py-20 px-6">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold mb-4">Simple, transparent pricing</h2>
@@ -233,7 +341,7 @@
             </div>
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Free -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
                     <h3 class="font-semibold text-lg mb-2">Free</h3>
                     <div class="mb-6">
                         <span class="text-4xl font-bold">$0</span>
@@ -245,6 +353,9 @@
                         </li>
                         <li class="flex items-center gap-2">
                             <span class="text-green-500">✓</span> All extraction types
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span> Smart Parsers included
                         </li>
                         <li class="flex items-center gap-2">
                             <span class="text-green-500">✓</span> Community support
@@ -272,10 +383,10 @@
                             <span class="text-green-500">✓</span> All extraction types
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> Priority support
+                            <span class="text-green-500">✓</span> Smart Parsers included
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> Faster processing
+                            <span class="text-green-500">✓</span> Priority support
                         </li>
                     </ul>
                     <a href="#waitlist" class="block text-center py-3 gradient-bg text-white rounded-xl font-medium hover:opacity-90 transition">
@@ -283,7 +394,7 @@
                     </a>
                 </div>
                 <!-- Business -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
                     <h3 class="font-semibold text-lg mb-2">Business</h3>
                     <div class="mb-6">
                         <span class="text-4xl font-bold">$79</span>
@@ -297,7 +408,7 @@
                             <span class="text-green-500">✓</span> All extraction types
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> Dedicated support
+                            <span class="text-green-500">✓</span> Smart Parsers included
                         </li>
                         <li class="flex items-center gap-2">
                             <span class="text-green-500">✓</span> SLA guarantee
@@ -312,14 +423,14 @@
     </section>
 
     <!-- Waitlist -->
-    <section id="waitlist" class="py-20 px-6">
+    <section id="waitlist" class="py-20 px-6 bg-gray-50">
         <div class="max-w-2xl mx-auto text-center">
             <h2 class="text-3xl font-bold mb-4">Get early access</h2>
             <p class="text-gray-600 text-lg mb-8">
                 Join the waitlist and be the first to know when we launch. Early users get 3 months free Pro plan.
             </p>
             
-            <div class="bg-gray-50 rounded-2xl p-8">
+            <div class="bg-white rounded-2xl p-8 shadow-sm">
                 <form action="https://formspree.io/f/mrebdvvp" method="POST" class="space-y-4">
                     <input 
                         type="email" 
@@ -354,7 +465,7 @@
                 </div>
                 <div class="flex gap-6 text-gray-600">
                     <a href="https://pdfpull-895295000838.europe-west1.run.app/docs" target="_blank" class="hover:text-gray-900">API Docs</a>
-                    <a href="https://github.com/uppnrise/pdfpull" target="_blank" class="hover:text-gray-900">GitHub</a>
+                    <a href="playground.html" class="hover:text-gray-900">Playground</a>
                     <a href="mailto:mtbnacar@gmail.com" class="hover:text-gray-900">Contact</a>
                 </div>
             </div>
