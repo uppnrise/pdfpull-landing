@@ -84,14 +84,14 @@
     <section class="pt-32 pb-20 px-6">
         <div class="max-w-4xl mx-auto text-center">
             <div class="inline-block mb-6 px-4 py-2 bg-purple-50 rounded-full text-purple-700 text-sm font-medium" data-i18n="hero.badge">
-                🚀 NEW: Invoice & Resume Parsers with Multi-Language Support
+                🧠 NEW: Auto Language Detection — No Config Needed!
             </div>
             <h1 class="text-5xl sm:text-6xl font-bold mb-6 leading-tight">
                 <span class="gradient-text" data-i18n="hero.title">Smart PDF Parsing</span>
                 <br><span data-i18n="hero.subtitle">for Invoices & Resumes</span>
             </h1>
             <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto" data-i18n="hero.description">
-                Extract structured data from any invoice or resume. Get vendor info, amounts, dates, skills, experience — all as clean JSON. Supports English, German & Turkish.
+                Extract structured data from any invoice or resume. Get vendor info, amounts, dates, skills, experience — all as clean JSON. Auto-detects English, German & Turkish.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="playground.html" class="gradient-bg text-white px-8 py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition shadow-lg shadow-purple-500/25" data-i18n="hero.tryDemo">
@@ -141,7 +141,7 @@
                             <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm" data-i18n="parsers.invoice.tag4">Tax ID</span>
                         </div>
                         <div class="text-sm text-gray-500" data-i18n="parsers.supports">
-                            🌍 Supports: English, German, Turkish
+                            🧠 Auto-detects: English, German, Turkish
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                             <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm" data-i18n="parsers.resume.tag4">Education</span>
                         </div>
                         <div class="text-sm text-gray-500" data-i18n="parsers.supports">
-                            🌍 Supports: English, German, Turkish
+                            🧠 Auto-detects: English, German, Turkish
                         </div>
                     </div>
                 </div>
@@ -200,11 +200,10 @@
                     <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div class="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
-<pre class="text-sm text-gray-300 font-mono"><code><span class="text-gray-500"># Parse an invoice - get structured data</span>
+<pre class="text-sm text-gray-300 font-mono"><code><span class="text-gray-500"># Parse an invoice - language auto-detected!</span>
 <span class="text-green-400">curl</span> -X POST <span class="text-yellow-300">"https://api.pdfpull.com/v1/parse/invoice"</span> \
   -H <span class="text-yellow-300">"X-API-Key: your_api_key"</span> \
-  -F <span class="text-yellow-300">"file=@invoice.pdf"</span> \
-  -F <span class="text-yellow-300">"language=en"</span>
+  -F <span class="text-yellow-300">"file=@invoice.pdf"</span>
 
 <span class="text-gray-500"># Response</span>
 {
@@ -318,8 +317,8 @@
                     <div class="flex items-start gap-4">
                         <div class="text-green-500 text-xl">✓</div>
                         <div>
-                            <h3 class="font-semibold mb-1" data-i18n="why.multiLang.title">Multi-Language</h3>
-                            <p class="text-gray-600 text-sm" data-i18n="why.multiLang.desc">English, German, Turkish support. More coming soon.</p>
+                            <h3 class="font-semibold mb-1" data-i18n="why.autoLang.title">Auto Language Detection</h3>
+                            <p class="text-gray-600 text-sm" data-i18n="why.autoLang.desc">No config needed. We detect EN, DE, TR automatically.</p>
                         </div>
                     </div>
                 </div>
@@ -502,10 +501,10 @@
             "nav.joinWaitlist": "Join Waitlist",
             
             // Hero
-            "hero.badge": "🚀 NEW: Invoice & Resume Parsers with Multi-Language Support",
+            "hero.badge": "🧠 NEW: Auto Language Detection — No Config Needed!",
             "hero.title": "Smart PDF Parsing",
             "hero.subtitle": "for Invoices & Resumes",
-            "hero.description": "Extract structured data from any invoice or resume. Get vendor info, amounts, dates, skills, experience — all as clean JSON. Supports English, German & Turkish.",
+            "hero.description": "Extract structured data from any invoice or resume. Get vendor info, amounts, dates, skills, experience — all as clean JSON. Auto-detects English, German & Turkish.",
             "hero.tryDemo": "Try Demo Free →",
             "hero.seeExamples": "See Examples",
             
@@ -524,7 +523,7 @@
             "parsers.resume.tag2": "Skills",
             "parsers.resume.tag3": "Experience",
             "parsers.resume.tag4": "Education",
-            "parsers.supports": "🌍 Supports: English, German, Turkish",
+            "parsers.supports": "🧠 Auto-detects: English, German, Turkish",
             "parsers.tryNow": "Try Smart Parsers Now →",
             
             // Code
@@ -565,8 +564,8 @@
             "why.title": "Why pdfpull?",
             "why.noAi.title": "No AI Costs",
             "why.noAi.desc": "Rule-based extraction. No GPT API fees. Predictable pricing.",
-            "why.multiLang.title": "Multi-Language",
-            "why.multiLang.desc": "English, German, Turkish support. More coming soon.",
+            "why.autoLang.title": "Auto Language Detection",
+            "why.autoLang.desc": "No config needed. We detect EN, DE, TR automatically.",
             "why.confidence.title": "Confidence Score",
             "why.confidence.desc": "Know how reliable the extraction is. Flag for review.",
             "why.devFirst.title": "Developer-First",
@@ -608,10 +607,10 @@
             "nav.joinWaitlist": "Warteliste",
             
             // Hero
-            "hero.badge": "🚀 NEU: Rechnungs- & Lebenslauf-Parser mit Mehrsprachigkeit",
+            "hero.badge": "🧠 NEU: Automatische Spracherkennung — Keine Konfiguration nötig!",
             "hero.title": "Intelligente PDF-Analyse",
             "hero.subtitle": "für Rechnungen & Lebensläufe",
-            "hero.description": "Extrahieren Sie strukturierte Daten aus Rechnungen und Lebensläufen. Lieferant, Beträge, Daten, Fähigkeiten — alles als sauberes JSON. Unterstützt Englisch, Deutsch & Türkisch.",
+            "hero.description": "Extrahieren Sie strukturierte Daten aus Rechnungen und Lebensläufen. Lieferant, Beträge, Daten, Fähigkeiten — alles als sauberes JSON. Erkennt automatisch Englisch, Deutsch & Türkisch.",
             "hero.tryDemo": "Kostenlos testen →",
             "hero.seeExamples": "Beispiele ansehen",
             
@@ -630,7 +629,7 @@
             "parsers.resume.tag2": "Fähigkeiten",
             "parsers.resume.tag3": "Erfahrung",
             "parsers.resume.tag4": "Ausbildung",
-            "parsers.supports": "🌍 Unterstützt: Englisch, Deutsch, Türkisch",
+            "parsers.supports": "🧠 Erkennt automatisch: Englisch, Deutsch, Türkisch",
             "parsers.tryNow": "Smart Parser jetzt testen →",
             
             // Code
@@ -671,8 +670,8 @@
             "why.title": "Warum pdfpull?",
             "why.noAi.title": "Keine KI-Kosten",
             "why.noAi.desc": "Regelbasierte Extraktion. Keine GPT-API-Gebühren. Vorhersehbare Preise.",
-            "why.multiLang.title": "Mehrsprachig",
-            "why.multiLang.desc": "Englisch, Deutsch, Türkisch. Weitere Sprachen folgen.",
+            "why.autoLang.title": "Automatische Spracherkennung",
+            "why.autoLang.desc": "Keine Konfiguration nötig. Wir erkennen EN, DE, TR automatisch.",
             "why.confidence.title": "Konfidenzwert",
             "why.confidence.desc": "Wissen Sie, wie zuverlässig die Extraktion ist. Zur Überprüfung markieren.",
             "why.devFirst.title": "Entwickler-First",
@@ -714,10 +713,10 @@
             "nav.joinWaitlist": "Bekleme Listesi",
             
             // Hero
-            "hero.badge": "🚀 YENİ: Çoklu Dil Destekli Fatura ve CV Ayrıştırıcıları",
+            "hero.badge": "🧠 YENİ: Otomatik Dil Algılama — Yapılandırma Gerekmez!",
             "hero.title": "Akıllı PDF Ayrıştırma",
             "hero.subtitle": "Faturalar ve CV'ler için",
-            "hero.description": "Herhangi bir fatura veya CV'den yapılandırılmış veri çıkarın. Satıcı bilgisi, tutarlar, tarihler, yetenekler — hepsi temiz JSON olarak. İngilizce, Almanca ve Türkçe destekler.",
+            "hero.description": "Herhangi bir fatura veya CV'den yapılandırılmış veri çıkarın. Satıcı bilgisi, tutarlar, tarihler, yetenekler — hepsi temiz JSON olarak. İngilizce, Almanca ve Türkçe'yi otomatik algılar.",
             "hero.tryDemo": "Ücretsiz Dene →",
             "hero.seeExamples": "Örnekleri Gör",
             
@@ -736,7 +735,7 @@
             "parsers.resume.tag2": "Yetenekler",
             "parsers.resume.tag3": "Deneyim",
             "parsers.resume.tag4": "Eğitim",
-            "parsers.supports": "🌍 Desteklenen Diller: İngilizce, Almanca, Türkçe",
+            "parsers.supports": "🧠 Otomatik algılar: İngilizce, Almanca, Türkçe",
             "parsers.tryNow": "Akıllı Ayrıştırıcıları Dene →",
             
             // Code
@@ -777,8 +776,8 @@
             "why.title": "Neden pdfpull?",
             "why.noAi.title": "AI Maliyeti Yok",
             "why.noAi.desc": "Kural tabanlı çıkarma. GPT API ücreti yok. Öngörülebilir fiyatlar.",
-            "why.multiLang.title": "Çoklu Dil",
-            "why.multiLang.desc": "İngilizce, Almanca, Türkçe desteği. Daha fazlası yakında.",
+            "why.autoLang.title": "Otomatik Dil Algılama",
+            "why.autoLang.desc": "Yapılandırma gerekmez. EN, DE, TR otomatik algılanır.",
             "why.confidence.title": "Güven Skoru",
             "why.confidence.desc": "Çıkarmanın ne kadar güvenilir olduğunu bilin. İnceleme için işaretle.",
             "why.devFirst.title": "Geliştirici Öncelikli",
