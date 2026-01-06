@@ -36,9 +36,12 @@
         .parser-card:hover {
             transform: scale(1.02);
         }
-        .parser-card.selected {
-            ring: 2px;
-            ring-color: #667eea;
+        .lang-btn {
+            transition: all 0.2s ease;
+        }
+        .lang-btn.active {
+            background: #667eea;
+            color: white;
         }
     </style>
 </head>
@@ -52,9 +55,15 @@
                 <span class="font-bold text-xl">pdfpull</span>
             </a>
             <div class="flex items-center gap-6">
-                <a href="index.html" class="text-gray-600 hover:text-gray-900">Home</a>
+                <!-- Language Selector -->
+                <div class="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                    <button onclick="setLanguage('en')" class="lang-btn px-2 py-1 rounded text-sm font-medium" data-lang="en">EN</button>
+                    <button onclick="setLanguage('de')" class="lang-btn px-2 py-1 rounded text-sm font-medium" data-lang="de">DE</button>
+                    <button onclick="setLanguage('tr')" class="lang-btn px-2 py-1 rounded text-sm font-medium" data-lang="tr">TR</button>
+                </div>
+                <a href="index.html" class="text-gray-600 hover:text-gray-900" data-i18n="nav.home">Home</a>
                 <a href="https://pdfpull-895295000838.europe-west1.run.app/docs" target="_blank" class="text-gray-600 hover:text-gray-900">API Docs</a>
-                <a href="index.html#waitlist" class="gradient-bg text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition">
+                <a href="index.html#waitlist" class="gradient-bg text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition" data-i18n="nav.joinWaitlist">
                     Join Waitlist
                 </a>
             </div>
@@ -64,14 +73,14 @@
     <!-- Main -->
     <main class="max-w-4xl mx-auto px-6 py-12">
         <div class="text-center mb-10">
-            <h1 class="text-3xl font-bold mb-3">Try pdfpull</h1>
-            <p class="text-gray-600">Upload a PDF and see smart parsing in action. No signup required.</p>
+            <h1 class="text-3xl font-bold mb-3" data-i18n="playground.title">Try pdfpull</h1>
+            <p class="text-gray-600" data-i18n="playground.subtitle">Upload a PDF and see smart parsing in action. No signup required.</p>
         </div>
 
         <div class="bg-white rounded-2xl shadow-sm p-8">
             <!-- Quick Select: Smart Parsers -->
             <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-3">⭐ Smart Parsers (Recommended)</label>
+                <label class="block text-sm font-medium text-gray-700 mb-3" data-i18n="playground.smartParsers">⭐ Smart Parsers (Recommended)</label>
                 <div class="grid grid-cols-2 gap-4">
                     <button 
                         onclick="selectParser('invoice')" 
@@ -81,8 +90,8 @@
                         <div class="flex items-center gap-3">
                             <span class="text-2xl">🧾</span>
                             <div>
-                                <div class="font-semibold text-purple-900">Invoice Parser</div>
-                                <div class="text-xs text-purple-600">Vendor, amounts, dates</div>
+                                <div class="font-semibold text-purple-900" data-i18n="playground.invoiceParser">Invoice Parser</div>
+                                <div class="text-xs text-purple-600" data-i18n="playground.invoiceDesc">Vendor, amounts, dates</div>
                             </div>
                         </div>
                     </button>
@@ -94,8 +103,8 @@
                         <div class="flex items-center gap-3">
                             <span class="text-2xl">📋</span>
                             <div>
-                                <div class="font-semibold text-emerald-900">Resume Parser</div>
-                                <div class="text-xs text-emerald-600">Contact, skills, experience</div>
+                                <div class="font-semibold text-emerald-900" data-i18n="playground.resumeParser">Resume Parser</div>
+                                <div class="text-xs text-emerald-600" data-i18n="playground.resumeDesc">Contact, skills, experience</div>
                             </div>
                         </div>
                     </button>
@@ -111,8 +120,8 @@
                 <input type="file" id="file-input" accept=".pdf" class="hidden">
                 <div id="upload-prompt">
                     <div class="text-5xl mb-4">📄</div>
-                    <p class="text-lg font-medium text-gray-700">Drop your PDF here</p>
-                    <p class="text-gray-500">or click to browse</p>
+                    <p class="text-lg font-medium text-gray-700" data-i18n="playground.dropHere">Drop your PDF here</p>
+                    <p class="text-gray-500" data-i18n="playground.orClick">or click to browse</p>
                 </div>
                 <div id="file-info" class="hidden">
                     <div class="text-5xl mb-4">✅</div>
@@ -124,39 +133,40 @@
             <!-- Options -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Extraction Type</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="playground.extractionType">Extraction Type</label>
                     <select id="extract-type" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none">
-                        <optgroup label="⭐ Smart Parsers">
-                            <option value="invoice">🧾 Invoice Parser</option>
-                            <option value="resume">📋 Resume Parser</option>
+                        <optgroup data-i18n-label="playground.smartParsersGroup" label="⭐ Smart Parsers">
+                            <option value="invoice" data-i18n="playground.opt.invoice">🧾 Invoice Parser</option>
+                            <option value="resume" data-i18n="playground.opt.resume">📋 Resume Parser</option>
                         </optgroup>
-                        <optgroup label="Basic Extraction">
-                            <option value="text">📄 Text Extraction</option>
-                            <option value="tables">📊 Table Extraction</option>
-                            <option value="metadata">ℹ️ Metadata</option>
-                            <option value="info">📋 Full Info</option>
-                            <option value="links">🔗 Extract Links</option>
-                            <option value="images">🖼️ Extract Images</option>
-                            <option value="pages-to-images">📸 PDF to Images</option>
+                        <optgroup data-i18n-label="playground.basicGroup" label="Basic Extraction">
+                            <option value="text" data-i18n="playground.opt.text">📄 Text Extraction</option>
+                            <option value="tables" data-i18n="playground.opt.tables">📊 Table Extraction</option>
+                            <option value="metadata" data-i18n="playground.opt.metadata">ℹ️ Metadata</option>
+                            <option value="info" data-i18n="playground.opt.info">📋 Full Info</option>
+                            <option value="links" data-i18n="playground.opt.links">🔗 Extract Links</option>
+                            <option value="images" data-i18n="playground.opt.images">🖼️ Extract Images</option>
+                            <option value="pages-to-images" data-i18n="playground.opt.pdfToImg">📸 PDF to Images</option>
                         </optgroup>
-                        <optgroup label="Coming Soon">
-                            <option value="ocr" disabled>🔍 OCR - Coming Soon</option>
+                        <optgroup data-i18n-label="playground.comingSoonGroup" label="Coming Soon">
+                            <option value="ocr" disabled data-i18n="playground.opt.ocr">🔍 OCR - Coming Soon</option>
                         </optgroup>
                     </select>
                 </div>
                 <div id="language-container">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
-                    <select id="language" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none">
+                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="playground.docLanguage">Document Language</label>
+                    <select id="doc-language" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none">
                         <option value="en">🇺🇸 English</option>
                         <option value="de">🇩🇪 German (Deutsch)</option>
                         <option value="tr">🇹🇷 Turkish (Türkçe)</option>
                     </select>
                 </div>
                 <div id="pages-container">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Pages (optional)</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="playground.pages">Pages (optional)</label>
                     <input 
                         type="text" 
                         id="pages" 
+                        data-i18n-placeholder="playground.pagesPlaceholder"
                         placeholder="e.g., 1,2,3 or 1-5"
                         class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none"
                     >
@@ -169,6 +179,7 @@
                 onclick="extractPDF()"
                 disabled
                 class="w-full gradient-bg text-white px-6 py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                data-i18n="playground.extractNow"
             >
                 Extract Now
             </button>
@@ -176,22 +187,22 @@
             <!-- Loading -->
             <div id="loading" class="hidden mt-6 text-center">
                 <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-purple-500 border-t-transparent"></div>
-                <p class="mt-2 text-gray-600">Processing your PDF...</p>
+                <p class="mt-2 text-gray-600" data-i18n="playground.processing">Processing your PDF...</p>
             </div>
 
             <!-- Error -->
             <div id="error" class="hidden mt-6 bg-red-50 text-red-700 p-4 rounded-xl">
-                <p class="font-medium">Error</p>
+                <p class="font-medium" data-i18n="playground.error">Error</p>
                 <p id="error-message" class="text-sm"></p>
             </div>
 
             <!-- Result -->
             <div id="result" class="hidden mt-6">
                 <div class="flex justify-between items-center mb-3">
-                    <h3 class="font-semibold text-gray-700">Result</h3>
+                    <h3 class="font-semibold text-gray-700" data-i18n="playground.result">Result</h3>
                     <div class="flex gap-2">
                         <span id="confidence-badge" class="hidden px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium"></span>
-                        <button onclick="copyResult()" class="text-sm text-purple-600 hover:text-purple-800 font-medium">
+                        <button onclick="copyResult()" class="text-sm text-purple-600 hover:text-purple-800 font-medium" data-i18n="playground.copy">
                             📋 Copy
                         </button>
                     </div>
@@ -206,23 +217,23 @@
         <div class="mt-8 grid sm:grid-cols-3 gap-4 text-center">
             <div class="bg-white rounded-xl p-4">
                 <p class="text-2xl mb-1">🔒</p>
-                <p class="text-sm text-gray-600">Files are not stored</p>
+                <p class="text-sm text-gray-600" data-i18n="playground.notStored">Files are not stored</p>
             </div>
             <div class="bg-white rounded-xl p-4">
                 <p class="text-2xl mb-1">⚡</p>
-                <p class="text-sm text-gray-600">Demo limit: 10 req/hour</p>
+                <p class="text-sm text-gray-600" data-i18n="playground.demoLimit">Demo limit: 10 req/hour</p>
             </div>
             <div class="bg-white rounded-xl p-4">
                 <p class="text-2xl mb-1">📦</p>
-                <p class="text-sm text-gray-600">Max file size: 10MB</p>
+                <p class="text-sm text-gray-600" data-i18n="playground.maxSize">Max file size: 10MB</p>
             </div>
         </div>
 
         <!-- CTA -->
         <div class="mt-12 text-center bg-white rounded-2xl p-8">
-            <h2 class="text-xl font-bold mb-2">Need more?</h2>
-            <p class="text-gray-600 mb-4">Join the waitlist for full API access with higher limits.</p>
-            <a href="index.html#waitlist" class="inline-block gradient-bg text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition">
+            <h2 class="text-xl font-bold mb-2" data-i18n="playground.needMore">Need more?</h2>
+            <p class="text-gray-600 mb-4" data-i18n="playground.needMoreDesc">Join the waitlist for full API access with higher limits.</p>
+            <a href="index.html#waitlist" class="inline-block gradient-bg text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition" data-i18n="playground.joinWaitlistBtn">
                 Join Waitlist →
             </a>
         </div>
@@ -230,7 +241,7 @@
 
     <!-- Footer -->
     <footer class="py-8 px-6 text-center text-gray-500 text-sm">
-        <p>© 2025 pdfpull. All rights reserved.</p>
+        <p>© 2025 pdfpull. <span data-i18n="footer.rights">All rights reserved.</span></p>
     </footer>
 
     <script>
@@ -238,6 +249,190 @@
         const DEMO_KEY = 'sk_demo_123456789';
         
         let selectedFile = null;
+
+        // Translations
+        const translations = {
+            en: {
+                "nav.home": "Home",
+                "nav.joinWaitlist": "Join Waitlist",
+                "playground.title": "Try pdfpull",
+                "playground.subtitle": "Upload a PDF and see smart parsing in action. No signup required.",
+                "playground.smartParsers": "⭐ Smart Parsers (Recommended)",
+                "playground.invoiceParser": "Invoice Parser",
+                "playground.invoiceDesc": "Vendor, amounts, dates",
+                "playground.resumeParser": "Resume Parser",
+                "playground.resumeDesc": "Contact, skills, experience",
+                "playground.dropHere": "Drop your PDF here",
+                "playground.orClick": "or click to browse",
+                "playground.extractionType": "Extraction Type",
+                "playground.docLanguage": "Document Language",
+                "playground.pages": "Pages (optional)",
+                "playground.pagesPlaceholder": "e.g., 1,2,3 or 1-5",
+                "playground.extractNow": "Extract Now",
+                "playground.processing": "Processing your PDF...",
+                "playground.error": "Error",
+                "playground.result": "Result",
+                "playground.copy": "📋 Copy",
+                "playground.notStored": "Files are not stored",
+                "playground.demoLimit": "Demo limit: 10 req/hour",
+                "playground.maxSize": "Max file size: 10MB",
+                "playground.needMore": "Need more?",
+                "playground.needMoreDesc": "Join the waitlist for full API access with higher limits.",
+                "playground.joinWaitlistBtn": "Join Waitlist →",
+                "playground.smartParsersGroup": "⭐ Smart Parsers",
+                "playground.basicGroup": "Basic Extraction",
+                "playground.comingSoonGroup": "Coming Soon",
+                "playground.opt.invoice": "🧾 Invoice Parser",
+                "playground.opt.resume": "📋 Resume Parser",
+                "playground.opt.text": "📄 Text Extraction",
+                "playground.opt.tables": "📊 Table Extraction",
+                "playground.opt.metadata": "ℹ️ Metadata",
+                "playground.opt.info": "📋 Full Info",
+                "playground.opt.links": "🔗 Extract Links",
+                "playground.opt.images": "🖼️ Extract Images",
+                "playground.opt.pdfToImg": "📸 PDF to Images",
+                "playground.opt.ocr": "🔍 OCR - Coming Soon",
+                "playground.confidence": "confidence",
+                "playground.copied": "Copied to clipboard!",
+                "footer.rights": "All rights reserved."
+            },
+            de: {
+                "nav.home": "Startseite",
+                "nav.joinWaitlist": "Warteliste",
+                "playground.title": "pdfpull testen",
+                "playground.subtitle": "PDF hochladen und intelligentes Parsen erleben. Keine Anmeldung erforderlich.",
+                "playground.smartParsers": "⭐ Smart Parser (Empfohlen)",
+                "playground.invoiceParser": "Rechnungs-Parser",
+                "playground.invoiceDesc": "Lieferant, Beträge, Daten",
+                "playground.resumeParser": "Lebenslauf-Parser",
+                "playground.resumeDesc": "Kontakt, Fähigkeiten, Erfahrung",
+                "playground.dropHere": "PDF hier ablegen",
+                "playground.orClick": "oder klicken zum Durchsuchen",
+                "playground.extractionType": "Extraktionstyp",
+                "playground.docLanguage": "Dokumentsprache",
+                "playground.pages": "Seiten (optional)",
+                "playground.pagesPlaceholder": "z.B. 1,2,3 oder 1-5",
+                "playground.extractNow": "Jetzt extrahieren",
+                "playground.processing": "PDF wird verarbeitet...",
+                "playground.error": "Fehler",
+                "playground.result": "Ergebnis",
+                "playground.copy": "📋 Kopieren",
+                "playground.notStored": "Dateien werden nicht gespeichert",
+                "playground.demoLimit": "Demo-Limit: 10 Anfr./Stunde",
+                "playground.maxSize": "Max. Dateigröße: 10MB",
+                "playground.needMore": "Mehr benötigt?",
+                "playground.needMoreDesc": "Warteliste beitreten für vollen API-Zugang mit höheren Limits.",
+                "playground.joinWaitlistBtn": "Zur Warteliste →",
+                "playground.smartParsersGroup": "⭐ Smart Parser",
+                "playground.basicGroup": "Basis-Extraktion",
+                "playground.comingSoonGroup": "Demnächst",
+                "playground.opt.invoice": "🧾 Rechnungs-Parser",
+                "playground.opt.resume": "📋 Lebenslauf-Parser",
+                "playground.opt.text": "📄 Textextraktion",
+                "playground.opt.tables": "📊 Tabellenextraktion",
+                "playground.opt.metadata": "ℹ️ Metadaten",
+                "playground.opt.info": "📋 Vollständige Info",
+                "playground.opt.links": "🔗 Links extrahieren",
+                "playground.opt.images": "🖼️ Bilder extrahieren",
+                "playground.opt.pdfToImg": "📸 PDF zu Bildern",
+                "playground.opt.ocr": "🔍 OCR - Demnächst",
+                "playground.confidence": "Konfidenz",
+                "playground.copied": "In Zwischenablage kopiert!",
+                "footer.rights": "Alle Rechte vorbehalten."
+            },
+            tr: {
+                "nav.home": "Ana Sayfa",
+                "nav.joinWaitlist": "Bekleme Listesi",
+                "playground.title": "pdfpull'u Dene",
+                "playground.subtitle": "PDF yükle ve akıllı ayrıştırmayı gör. Kayıt gerekmiyor.",
+                "playground.smartParsers": "⭐ Akıllı Ayrıştırıcılar (Önerilen)",
+                "playground.invoiceParser": "Fatura Ayrıştırıcı",
+                "playground.invoiceDesc": "Satıcı, tutarlar, tarihler",
+                "playground.resumeParser": "CV Ayrıştırıcı",
+                "playground.resumeDesc": "İletişim, yetenekler, deneyim",
+                "playground.dropHere": "PDF'inizi buraya bırakın",
+                "playground.orClick": "veya gözatmak için tıklayın",
+                "playground.extractionType": "Çıkarma Türü",
+                "playground.docLanguage": "Belge Dili",
+                "playground.pages": "Sayfalar (isteğe bağlı)",
+                "playground.pagesPlaceholder": "örn. 1,2,3 veya 1-5",
+                "playground.extractNow": "Şimdi Çıkar",
+                "playground.processing": "PDF işleniyor...",
+                "playground.error": "Hata",
+                "playground.result": "Sonuç",
+                "playground.copy": "📋 Kopyala",
+                "playground.notStored": "Dosyalar saklanmaz",
+                "playground.demoLimit": "Demo limiti: 10 istek/saat",
+                "playground.maxSize": "Maks. dosya boyutu: 10MB",
+                "playground.needMore": "Daha fazlası mı gerekiyor?",
+                "playground.needMoreDesc": "Daha yüksek limitlerle tam API erişimi için bekleme listesine katılın.",
+                "playground.joinWaitlistBtn": "Bekleme Listesine Katıl →",
+                "playground.smartParsersGroup": "⭐ Akıllı Ayrıştırıcılar",
+                "playground.basicGroup": "Temel Çıkarma",
+                "playground.comingSoonGroup": "Yakında",
+                "playground.opt.invoice": "🧾 Fatura Ayrıştırıcı",
+                "playground.opt.resume": "📋 CV Ayrıştırıcı",
+                "playground.opt.text": "📄 Metin Çıkarma",
+                "playground.opt.tables": "📊 Tablo Çıkarma",
+                "playground.opt.metadata": "ℹ️ Metadata",
+                "playground.opt.info": "📋 Tam Bilgi",
+                "playground.opt.links": "🔗 Link Çıkarma",
+                "playground.opt.images": "🖼️ Görsel Çıkarma",
+                "playground.opt.pdfToImg": "📸 PDF'den Görsele",
+                "playground.opt.ocr": "🔍 OCR - Yakında",
+                "playground.confidence": "güven",
+                "playground.copied": "Panoya kopyalandı!",
+                "footer.rights": "Tüm hakları saklıdır."
+            }
+        };
+
+        // Current language
+        let currentLang = localStorage.getItem('pdfpull-lang') || 'en';
+
+        // Set language
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('pdfpull-lang', lang);
+            updateUILanguage();
+        }
+
+        // Update UI with translations
+        function updateUILanguage() {
+            // Update lang buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === currentLang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLang;
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.dataset.i18nPlaceholder;
+                if (translations[currentLang][key]) {
+                    el.placeholder = translations[currentLang][key];
+                }
+            });
+
+            // Update optgroup labels
+            document.querySelectorAll('[data-i18n-label]').forEach(el => {
+                const key = el.dataset.i18nLabel;
+                if (translations[currentLang][key]) {
+                    el.label = translations[currentLang][key];
+                }
+            });
+        }
 
         // Elements
         const dropZone = document.getElementById('drop-zone');
@@ -334,7 +529,7 @@
             if (!selectedFile) return;
 
             const type = extractType.value;
-            const language = document.getElementById('language').value;
+            const docLanguage = document.getElementById('doc-language').value;
             const pages = document.getElementById('pages').value;
 
             // Show loading
@@ -350,7 +545,7 @@
             
             // Add language for smart parsers
             if (['invoice', 'resume'].includes(type)) {
-                formData.append('language', language);
+                formData.append('language', docLanguage);
             }
             
             // Add pages for applicable types
@@ -392,7 +587,8 @@
                 if (data.confidence !== undefined) {
                     const badge = document.getElementById('confidence-badge');
                     const confidence = Math.round(data.confidence * 100);
-                    badge.textContent = `${confidence}% confidence`;
+                    const confText = translations[currentLang]['playground.confidence'] || 'confidence';
+                    badge.textContent = `${confidence}% ${confText}`;
                     badge.classList.remove('hidden');
                     
                     // Color based on confidence
@@ -426,9 +622,15 @@
         function copyResult() {
             const content = document.getElementById('result-content').textContent;
             navigator.clipboard.writeText(content).then(() => {
-                alert('Copied to clipboard!');
+                const msg = translations[currentLang]['playground.copied'] || 'Copied to clipboard!';
+                alert(msg);
             });
         }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUILanguage();
+        });
     </script>
 </body>
 </html>

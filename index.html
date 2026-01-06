@@ -43,6 +43,13 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
         }
+        .lang-btn {
+            transition: all 0.2s ease;
+        }
+        .lang-btn.active {
+            background: #667eea;
+            color: white;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900 antialiased">
@@ -55,12 +62,18 @@
                 <span class="font-bold text-xl">pdfpull</span>
             </div>
             <div class="flex items-center gap-6">
-                <a href="#smart-parsers" class="text-gray-600 hover:text-gray-900 hidden sm:block">Smart Parsers</a>
-                <a href="#features" class="text-gray-600 hover:text-gray-900 hidden sm:block">Features</a>
-                <a href="#pricing" class="text-gray-600 hover:text-gray-900 hidden sm:block">Pricing</a>
-                <a href="playground.html" class="text-gray-600 hover:text-gray-900 hidden sm:block">Try It</a>
+                <!-- Language Selector -->
+                <div class="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                    <button onclick="setLanguage('en')" class="lang-btn px-2 py-1 rounded text-sm font-medium" data-lang="en">EN</button>
+                    <button onclick="setLanguage('de')" class="lang-btn px-2 py-1 rounded text-sm font-medium" data-lang="de">DE</button>
+                    <button onclick="setLanguage('tr')" class="lang-btn px-2 py-1 rounded text-sm font-medium" data-lang="tr">TR</button>
+                </div>
+                <a href="#smart-parsers" class="text-gray-600 hover:text-gray-900 hidden sm:block" data-i18n="nav.smartParsers">Smart Parsers</a>
+                <a href="#features" class="text-gray-600 hover:text-gray-900 hidden sm:block" data-i18n="nav.features">Features</a>
+                <a href="#pricing" class="text-gray-600 hover:text-gray-900 hidden sm:block" data-i18n="nav.pricing">Pricing</a>
+                <a href="playground.html" class="text-gray-600 hover:text-gray-900 hidden sm:block" data-i18n="nav.tryIt">Try It</a>
                 <a href="https://pdfpull-895295000838.europe-west1.run.app/docs" target="_blank" class="text-gray-600 hover:text-gray-900">API Docs</a>
-                <a href="#waitlist" class="gradient-bg text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition">
+                <a href="#waitlist" class="gradient-bg text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition" data-i18n="nav.joinWaitlist">
                     Join Waitlist
                 </a>
             </div>
@@ -70,20 +83,21 @@
     <!-- Hero -->
     <section class="pt-32 pb-20 px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-block mb-6 px-4 py-2 bg-purple-50 rounded-full text-purple-700 text-sm font-medium">
+            <div class="inline-block mb-6 px-4 py-2 bg-purple-50 rounded-full text-purple-700 text-sm font-medium" data-i18n="hero.badge">
                 🚀 NEW: Invoice & Resume Parsers with Multi-Language Support
             </div>
             <h1 class="text-5xl sm:text-6xl font-bold mb-6 leading-tight">
-                <span class="gradient-text">Smart PDF Parsing</span> for Invoices & Resumes
+                <span class="gradient-text" data-i18n="hero.title">Smart PDF Parsing</span>
+                <br><span data-i18n="hero.subtitle">for Invoices & Resumes</span>
             </h1>
-            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto" data-i18n="hero.description">
                 Extract structured data from any invoice or resume. Get vendor info, amounts, dates, skills, experience — all as clean JSON. Supports English, German & Turkish.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="playground.html" class="gradient-bg text-white px-8 py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition shadow-lg shadow-purple-500/25">
+                <a href="playground.html" class="gradient-bg text-white px-8 py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition shadow-lg shadow-purple-500/25" data-i18n="hero.tryDemo">
                     Try Demo Free →
                 </a>
-                <a href="#smart-parsers" class="bg-gray-100 text-gray-800 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-200 transition">
+                <a href="#smart-parsers" class="bg-gray-100 text-gray-800 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-200 transition" data-i18n="hero.seeExamples">
                     See Examples
                 </a>
             </div>
@@ -94,8 +108,8 @@
     <section id="smart-parsers" class="py-20 px-6 bg-gradient-to-b from-purple-50 to-white">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Smart Document Parsers</h2>
-                <p class="text-gray-600 text-lg">Upload a PDF, get structured data. It's that simple.</p>
+                <h2 class="text-3xl font-bold mb-4" data-i18n="parsers.title">Smart Document Parsers</h2>
+                <p class="text-gray-600 text-lg" data-i18n="parsers.subtitle">Upload a PDF, get structured data. It's that simple.</p>
             </div>
             
             <div class="grid md:grid-cols-2 gap-8">
@@ -104,9 +118,9 @@
                     <div class="gradient-bg p-6 text-white">
                         <div class="flex items-center gap-3 mb-2">
                             <span class="text-3xl">🧾</span>
-                            <h3 class="text-2xl font-bold">Invoice Parser</h3>
+                            <h3 class="text-2xl font-bold" data-i18n="parsers.invoice.title">Invoice Parser</h3>
                         </div>
-                        <p class="text-purple-100">Extract vendor, amounts, dates & line items</p>
+                        <p class="text-purple-100" data-i18n="parsers.invoice.subtitle">Extract vendor, amounts, dates & line items</p>
                     </div>
                     <div class="p-6">
                         <div class="code-block rounded-xl p-4 mb-4 overflow-x-auto">
@@ -121,12 +135,12 @@
 }</code></pre>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Vendor Info</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Amounts</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Dates</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Tax ID</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm" data-i18n="parsers.invoice.tag1">Vendor Info</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm" data-i18n="parsers.invoice.tag2">Amounts</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm" data-i18n="parsers.invoice.tag3">Dates</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm" data-i18n="parsers.invoice.tag4">Tax ID</span>
                         </div>
-                        <div class="text-sm text-gray-500">
+                        <div class="text-sm text-gray-500" data-i18n="parsers.supports">
                             🌍 Supports: English, German, Turkish
                         </div>
                     </div>
@@ -137,9 +151,9 @@
                     <div class="bg-gradient-to-r from-emerald-500 to-teal-500 p-6 text-white">
                         <div class="flex items-center gap-3 mb-2">
                             <span class="text-3xl">📋</span>
-                            <h3 class="text-2xl font-bold">Resume Parser</h3>
+                            <h3 class="text-2xl font-bold" data-i18n="parsers.resume.title">Resume Parser</h3>
                         </div>
-                        <p class="text-emerald-100">Extract contact, skills, experience & education</p>
+                        <p class="text-emerald-100" data-i18n="parsers.resume.subtitle">Extract contact, skills, experience & education</p>
                     </div>
                     <div class="p-6">
                         <div class="code-block rounded-xl p-4 mb-4 overflow-x-auto">
@@ -153,12 +167,12 @@
 }</code></pre>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">Contact</span>
-                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">Skills</span>
-                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">Experience</span>
-                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">Education</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm" data-i18n="parsers.resume.tag1">Contact</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm" data-i18n="parsers.resume.tag2">Skills</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm" data-i18n="parsers.resume.tag3">Experience</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm" data-i18n="parsers.resume.tag4">Education</span>
                         </div>
-                        <div class="text-sm text-gray-500">
+                        <div class="text-sm text-gray-500" data-i18n="parsers.supports">
                             🌍 Supports: English, German, Turkish
                         </div>
                     </div>
@@ -166,9 +180,8 @@
             </div>
 
             <div class="text-center mt-10">
-                <a href="playground.html" class="inline-flex items-center gap-2 gradient-bg text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition">
-                    <span>Try Smart Parsers Now</span>
-                    <span>→</span>
+                <a href="playground.html" class="inline-flex items-center gap-2 gradient-bg text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition" data-i18n="parsers.tryNow">
+                    Try Smart Parsers Now →
                 </a>
             </div>
         </div>
@@ -178,8 +191,8 @@
     <section class="py-16 px-6">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-10">
-                <h2 class="text-2xl font-bold mb-2">One API Call, Structured Data</h2>
-                <p class="text-gray-600">Parse any invoice with a single request</p>
+                <h2 class="text-2xl font-bold mb-2" data-i18n="code.title">One API Call, Structured Data</h2>
+                <p class="text-gray-600" data-i18n="code.subtitle">Parse any invoice with a single request</p>
             </div>
             <div class="code-block rounded-2xl p-6 overflow-x-auto shadow-2xl">
                 <div class="flex gap-2 mb-4">
@@ -210,24 +223,24 @@
     <section class="py-20 px-6 bg-gray-50">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Built for Real Use Cases</h2>
-                <p class="text-gray-600 text-lg">What developers are building with pdfpull</p>
+                <h2 class="text-3xl font-bold mb-4" data-i18n="useCases.title">Built for Real Use Cases</h2>
+                <p class="text-gray-600 text-lg" data-i18n="useCases.subtitle">What developers are building with pdfpull</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-white p-6 rounded-2xl shadow-sm">
                     <div class="text-3xl mb-4">💰</div>
-                    <h3 class="font-semibold text-lg mb-2">Expense Tracking</h3>
-                    <p class="text-gray-600">Auto-extract vendor, amount, date from receipts & invoices. Automate expense reports.</p>
+                    <h3 class="font-semibold text-lg mb-2" data-i18n="useCases.expense.title">Expense Tracking</h3>
+                    <p class="text-gray-600" data-i18n="useCases.expense.desc">Auto-extract vendor, amount, date from receipts & invoices. Automate expense reports.</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl shadow-sm">
                     <div class="text-3xl mb-4">👥</div>
-                    <h3 class="font-semibold text-lg mb-2">HR & Recruitment</h3>
-                    <p class="text-gray-600">Parse resumes at scale. Extract skills, experience, contact info for ATS systems.</p>
+                    <h3 class="font-semibold text-lg mb-2" data-i18n="useCases.hr.title">HR & Recruitment</h3>
+                    <p class="text-gray-600" data-i18n="useCases.hr.desc">Parse resumes at scale. Extract skills, experience, contact info for ATS systems.</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl shadow-sm">
                     <div class="text-3xl mb-4">📊</div>
-                    <h3 class="font-semibold text-lg mb-2">Accounting Automation</h3>
-                    <p class="text-gray-600">Process supplier invoices automatically. Extract line items, tax, totals.</p>
+                    <h3 class="font-semibold text-lg mb-2" data-i18n="useCases.accounting.title">Accounting Automation</h3>
+                    <p class="text-gray-600" data-i18n="useCases.accounting.desc">Process supplier invoices automatically. Extract line items, tax, totals.</p>
                 </div>
             </div>
         </div>
@@ -237,49 +250,49 @@
     <section id="features" class="py-20 px-6">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Plus All the Basics</h2>
-                <p class="text-gray-600 text-lg">Everything you need for PDF extraction</p>
+                <h2 class="text-3xl font-bold mb-4" data-i18n="features.title">Plus All the Basics</h2>
+                <p class="text-gray-600 text-lg" data-i18n="features.subtitle">Everything you need for PDF extraction</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-gray-50 p-5 rounded-xl">
                     <div class="text-2xl mb-3">📄</div>
-                    <h3 class="font-semibold mb-1">Text Extraction</h3>
-                    <p class="text-gray-600 text-sm">Extract all text with page selection</p>
+                    <h3 class="font-semibold mb-1" data-i18n="features.text.title">Text Extraction</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="features.text.desc">Extract all text with page selection</p>
                 </div>
                 <div class="bg-gray-50 p-5 rounded-xl">
                     <div class="text-2xl mb-3">📊</div>
-                    <h3 class="font-semibold mb-1">Table Extraction</h3>
-                    <p class="text-gray-600 text-sm">Get tables as structured JSON</p>
+                    <h3 class="font-semibold mb-1" data-i18n="features.table.title">Table Extraction</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="features.table.desc">Get tables as structured JSON</p>
                 </div>
                 <div class="bg-gray-50 p-5 rounded-xl">
                     <div class="text-2xl mb-3">📸</div>
-                    <h3 class="font-semibold mb-1">PDF to Images</h3>
-                    <p class="text-gray-600 text-sm">Convert pages to PNG (72-300 DPI)</p>
+                    <h3 class="font-semibold mb-1" data-i18n="features.pdfToImg.title">PDF to Images</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="features.pdfToImg.desc">Convert pages to PNG (72-300 DPI)</p>
                 </div>
                 <div class="bg-gray-50 p-5 rounded-xl">
                     <div class="text-2xl mb-3">🖼️</div>
-                    <h3 class="font-semibold mb-1">Extract Images</h3>
-                    <p class="text-gray-600 text-sm">Get embedded images with metadata</p>
+                    <h3 class="font-semibold mb-1" data-i18n="features.images.title">Extract Images</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="features.images.desc">Get embedded images with metadata</p>
                 </div>
                 <div class="bg-gray-50 p-5 rounded-xl">
                     <div class="text-2xl mb-3">🔗</div>
-                    <h3 class="font-semibold mb-1">Extract Links</h3>
-                    <p class="text-gray-600 text-sm">Get all URLs from your PDFs</p>
+                    <h3 class="font-semibold mb-1" data-i18n="features.links.title">Extract Links</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="features.links.desc">Get all URLs from your PDFs</p>
                 </div>
                 <div class="bg-gray-50 p-5 rounded-xl">
                     <div class="text-2xl mb-3">📋</div>
-                    <h3 class="font-semibold mb-1">Full PDF Info</h3>
-                    <p class="text-gray-600 text-sm">Word count, page count, metadata</p>
+                    <h3 class="font-semibold mb-1" data-i18n="features.info.title">Full PDF Info</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="features.info.desc">Word count, page count, metadata</p>
                 </div>
                 <div class="bg-gray-50 p-5 rounded-xl">
                     <div class="text-2xl mb-3">🔍</div>
-                    <h3 class="font-semibold mb-1">OCR Support</h3>
-                    <p class="text-gray-600 text-sm">Scanned docs — Coming Soon</p>
+                    <h3 class="font-semibold mb-1" data-i18n="features.ocr.title">OCR Support</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="features.ocr.desc">Scanned docs — Coming Soon</p>
                 </div>
                 <div class="bg-gray-50 p-5 rounded-xl">
                     <div class="text-2xl mb-3">⚡</div>
-                    <h3 class="font-semibold mb-1">Fast & Reliable</h3>
-                    <p class="text-gray-600 text-sm">Powered by PyMuPDF</p>
+                    <h3 class="font-semibold mb-1" data-i18n="features.fast.title">Fast & Reliable</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="features.fast.desc">Powered by PyMuPDF</p>
                 </div>
             </div>
         </div>
@@ -289,15 +302,15 @@
     <section class="py-20 px-6 bg-gray-50">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4">Why pdfpull?</h2>
+                <h2 class="text-3xl font-bold mb-4" data-i18n="why.title">Why pdfpull?</h2>
             </div>
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="bg-white p-6 rounded-xl">
                     <div class="flex items-start gap-4">
                         <div class="text-green-500 text-xl">✓</div>
                         <div>
-                            <h3 class="font-semibold mb-1">No AI Costs</h3>
-                            <p class="text-gray-600 text-sm">Rule-based extraction. No GPT API fees. Predictable pricing.</p>
+                            <h3 class="font-semibold mb-1" data-i18n="why.noAi.title">No AI Costs</h3>
+                            <p class="text-gray-600 text-sm" data-i18n="why.noAi.desc">Rule-based extraction. No GPT API fees. Predictable pricing.</p>
                         </div>
                     </div>
                 </div>
@@ -305,8 +318,8 @@
                     <div class="flex items-start gap-4">
                         <div class="text-green-500 text-xl">✓</div>
                         <div>
-                            <h3 class="font-semibold mb-1">Multi-Language</h3>
-                            <p class="text-gray-600 text-sm">English, German, Turkish support. More coming soon.</p>
+                            <h3 class="font-semibold mb-1" data-i18n="why.multiLang.title">Multi-Language</h3>
+                            <p class="text-gray-600 text-sm" data-i18n="why.multiLang.desc">English, German, Turkish support. More coming soon.</p>
                         </div>
                     </div>
                 </div>
@@ -314,8 +327,8 @@
                     <div class="flex items-start gap-4">
                         <div class="text-green-500 text-xl">✓</div>
                         <div>
-                            <h3 class="font-semibold mb-1">Confidence Score</h3>
-                            <p class="text-gray-600 text-sm">Know how reliable the extraction is. Flag for review.</p>
+                            <h3 class="font-semibold mb-1" data-i18n="why.confidence.title">Confidence Score</h3>
+                            <p class="text-gray-600 text-sm" data-i18n="why.confidence.desc">Know how reliable the extraction is. Flag for review.</p>
                         </div>
                     </div>
                 </div>
@@ -323,8 +336,8 @@
                     <div class="flex items-start gap-4">
                         <div class="text-green-500 text-xl">✓</div>
                         <div>
-                            <h3 class="font-semibold mb-1">Developer-First</h3>
-                            <p class="text-gray-600 text-sm">Simple REST API. Great docs. Fast integration.</p>
+                            <h3 class="font-semibold mb-1" data-i18n="why.devFirst.title">Developer-First</h3>
+                            <p class="text-gray-600 text-sm" data-i18n="why.devFirst.desc">Simple REST API. Great docs. Fast integration.</p>
                         </div>
                     </div>
                 </div>
@@ -336,60 +349,60 @@
     <section id="pricing" class="py-20 px-6">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Simple, transparent pricing</h2>
-                <p class="text-gray-600 text-lg">Start free, scale as you grow</p>
+                <h2 class="text-3xl font-bold mb-4" data-i18n="pricing.title">Simple, transparent pricing</h2>
+                <p class="text-gray-600 text-lg" data-i18n="pricing.subtitle">Start free, scale as you grow</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Free -->
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
-                    <h3 class="font-semibold text-lg mb-2">Free</h3>
+                    <h3 class="font-semibold text-lg mb-2" data-i18n="pricing.free.name">Free</h3>
                     <div class="mb-6">
                         <span class="text-4xl font-bold">$0</span>
-                        <span class="text-gray-500">/month</span>
+                        <span class="text-gray-500" data-i18n="pricing.perMonth">/month</span>
                     </div>
                     <ul class="space-y-3 mb-8 text-gray-600">
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> 100 pages/month
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.free.pages">100 pages/month</span>
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> All extraction types
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.allTypes">All extraction types</span>
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> Smart Parsers included
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.smartParsers">Smart Parsers included</span>
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> Community support
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.free.support">Community support</span>
                         </li>
                     </ul>
-                    <a href="#waitlist" class="block text-center py-3 border border-gray-300 rounded-xl font-medium hover:bg-gray-50 transition">
+                    <a href="#waitlist" class="block text-center py-3 border border-gray-300 rounded-xl font-medium hover:bg-gray-50 transition" data-i18n="pricing.joinWaitlist">
                         Join Waitlist
                     </a>
                 </div>
                 <!-- Pro -->
                 <div class="bg-white p-8 rounded-2xl shadow-lg border-2 border-purple-500 relative">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-purple-500 text-white text-sm px-3 py-1 rounded-full">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-purple-500 text-white text-sm px-3 py-1 rounded-full" data-i18n="pricing.popular">
                         Popular
                     </div>
                     <h3 class="font-semibold text-lg mb-2">Pro</h3>
                     <div class="mb-6">
                         <span class="text-4xl font-bold">$19</span>
-                        <span class="text-gray-500">/month</span>
+                        <span class="text-gray-500" data-i18n="pricing.perMonth">/month</span>
                     </div>
                     <ul class="space-y-3 mb-8 text-gray-600">
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> 5,000 pages/month
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.pro.pages">5,000 pages/month</span>
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> All extraction types
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.allTypes">All extraction types</span>
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> Smart Parsers included
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.smartParsers">Smart Parsers included</span>
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> Priority support
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.pro.support">Priority support</span>
                         </li>
                     </ul>
-                    <a href="#waitlist" class="block text-center py-3 gradient-bg text-white rounded-xl font-medium hover:opacity-90 transition">
+                    <a href="#waitlist" class="block text-center py-3 gradient-bg text-white rounded-xl font-medium hover:opacity-90 transition" data-i18n="pricing.joinWaitlist">
                         Join Waitlist
                     </a>
                 </div>
@@ -398,23 +411,23 @@
                     <h3 class="font-semibold text-lg mb-2">Business</h3>
                     <div class="mb-6">
                         <span class="text-4xl font-bold">$79</span>
-                        <span class="text-gray-500">/month</span>
+                        <span class="text-gray-500" data-i18n="pricing.perMonth">/month</span>
                     </div>
                     <ul class="space-y-3 mb-8 text-gray-600">
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> 50,000 pages/month
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.business.pages">50,000 pages/month</span>
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> All extraction types
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.allTypes">All extraction types</span>
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> Smart Parsers included
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.smartParsers">Smart Parsers included</span>
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-green-500">✓</span> SLA guarantee
+                            <span class="text-green-500">✓</span> <span data-i18n="pricing.business.support">SLA guarantee</span>
                         </li>
                     </ul>
-                    <a href="#waitlist" class="block text-center py-3 border border-gray-300 rounded-xl font-medium hover:bg-gray-50 transition">
+                    <a href="#waitlist" class="block text-center py-3 border border-gray-300 rounded-xl font-medium hover:bg-gray-50 transition" data-i18n="pricing.joinWaitlist">
                         Join Waitlist
                     </a>
                 </div>
@@ -425,8 +438,8 @@
     <!-- Waitlist -->
     <section id="waitlist" class="py-20 px-6 bg-gray-50">
         <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-4">Get early access</h2>
-            <p class="text-gray-600 text-lg mb-8">
+            <h2 class="text-3xl font-bold mb-4" data-i18n="waitlist.title">Get early access</h2>
+            <p class="text-gray-600 text-lg mb-8" data-i18n="waitlist.subtitle">
                 Join the waitlist and be the first to know when we launch. Early users get 3 months free Pro plan.
             </p>
             
@@ -435,6 +448,7 @@
                     <input 
                         type="email" 
                         name="email"
+                        data-i18n-placeholder="waitlist.placeholder"
                         placeholder="Enter your email" 
                         required
                         class="w-full px-6 py-4 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition text-lg"
@@ -444,11 +458,12 @@
                     <button 
                         type="submit"
                         class="w-full gradient-bg text-white px-6 py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition"
+                        data-i18n="waitlist.button"
                     >
                         Join Waitlist →
                     </button>
                 </form>
-                <p class="mt-4 text-gray-500 text-sm">
+                <p class="mt-4 text-gray-500 text-sm" data-i18n="waitlist.noSpam">
                     No spam, ever. We'll only email you about pdfpull.
                 </p>
             </div>
@@ -466,14 +481,383 @@
                 <div class="flex gap-6 text-gray-600">
                     <a href="https://pdfpull-895295000838.europe-west1.run.app/docs" target="_blank" class="hover:text-gray-900">API Docs</a>
                     <a href="playground.html" class="hover:text-gray-900">Playground</a>
-                    <a href="mailto:mtbnacar@gmail.com" class="hover:text-gray-900">Contact</a>
+                    <a href="mailto:mtbnacar@gmail.com" class="hover:text-gray-900" data-i18n="footer.contact">Contact</a>
                 </div>
             </div>
             <div class="mt-8 text-center text-gray-500 text-sm">
-                © 2025 pdfpull. All rights reserved.
+                © 2025 pdfpull. <span data-i18n="footer.rights">All rights reserved.</span>
             </div>
         </div>
     </footer>
+
+    <script>
+    // Translations
+    const translations = {
+        en: {
+            // Nav
+            "nav.smartParsers": "Smart Parsers",
+            "nav.features": "Features",
+            "nav.pricing": "Pricing",
+            "nav.tryIt": "Try It",
+            "nav.joinWaitlist": "Join Waitlist",
+            
+            // Hero
+            "hero.badge": "🚀 NEW: Invoice & Resume Parsers with Multi-Language Support",
+            "hero.title": "Smart PDF Parsing",
+            "hero.subtitle": "for Invoices & Resumes",
+            "hero.description": "Extract structured data from any invoice or resume. Get vendor info, amounts, dates, skills, experience — all as clean JSON. Supports English, German & Turkish.",
+            "hero.tryDemo": "Try Demo Free →",
+            "hero.seeExamples": "See Examples",
+            
+            // Parsers
+            "parsers.title": "Smart Document Parsers",
+            "parsers.subtitle": "Upload a PDF, get structured data. It's that simple.",
+            "parsers.invoice.title": "Invoice Parser",
+            "parsers.invoice.subtitle": "Extract vendor, amounts, dates & line items",
+            "parsers.invoice.tag1": "Vendor Info",
+            "parsers.invoice.tag2": "Amounts",
+            "parsers.invoice.tag3": "Dates",
+            "parsers.invoice.tag4": "Tax ID",
+            "parsers.resume.title": "Resume Parser",
+            "parsers.resume.subtitle": "Extract contact, skills, experience & education",
+            "parsers.resume.tag1": "Contact",
+            "parsers.resume.tag2": "Skills",
+            "parsers.resume.tag3": "Experience",
+            "parsers.resume.tag4": "Education",
+            "parsers.supports": "🌍 Supports: English, German, Turkish",
+            "parsers.tryNow": "Try Smart Parsers Now →",
+            
+            // Code
+            "code.title": "One API Call, Structured Data",
+            "code.subtitle": "Parse any invoice with a single request",
+            
+            // Use Cases
+            "useCases.title": "Built for Real Use Cases",
+            "useCases.subtitle": "What developers are building with pdfpull",
+            "useCases.expense.title": "Expense Tracking",
+            "useCases.expense.desc": "Auto-extract vendor, amount, date from receipts & invoices. Automate expense reports.",
+            "useCases.hr.title": "HR & Recruitment",
+            "useCases.hr.desc": "Parse resumes at scale. Extract skills, experience, contact info for ATS systems.",
+            "useCases.accounting.title": "Accounting Automation",
+            "useCases.accounting.desc": "Process supplier invoices automatically. Extract line items, tax, totals.",
+            
+            // Features
+            "features.title": "Plus All the Basics",
+            "features.subtitle": "Everything you need for PDF extraction",
+            "features.text.title": "Text Extraction",
+            "features.text.desc": "Extract all text with page selection",
+            "features.table.title": "Table Extraction",
+            "features.table.desc": "Get tables as structured JSON",
+            "features.pdfToImg.title": "PDF to Images",
+            "features.pdfToImg.desc": "Convert pages to PNG (72-300 DPI)",
+            "features.images.title": "Extract Images",
+            "features.images.desc": "Get embedded images with metadata",
+            "features.links.title": "Extract Links",
+            "features.links.desc": "Get all URLs from your PDFs",
+            "features.info.title": "Full PDF Info",
+            "features.info.desc": "Word count, page count, metadata",
+            "features.ocr.title": "OCR Support",
+            "features.ocr.desc": "Scanned docs — Coming Soon",
+            "features.fast.title": "Fast & Reliable",
+            "features.fast.desc": "Powered by PyMuPDF",
+            
+            // Why
+            "why.title": "Why pdfpull?",
+            "why.noAi.title": "No AI Costs",
+            "why.noAi.desc": "Rule-based extraction. No GPT API fees. Predictable pricing.",
+            "why.multiLang.title": "Multi-Language",
+            "why.multiLang.desc": "English, German, Turkish support. More coming soon.",
+            "why.confidence.title": "Confidence Score",
+            "why.confidence.desc": "Know how reliable the extraction is. Flag for review.",
+            "why.devFirst.title": "Developer-First",
+            "why.devFirst.desc": "Simple REST API. Great docs. Fast integration.",
+            
+            // Pricing
+            "pricing.title": "Simple, transparent pricing",
+            "pricing.subtitle": "Start free, scale as you grow",
+            "pricing.perMonth": "/month",
+            "pricing.free.name": "Free",
+            "pricing.free.pages": "100 pages/month",
+            "pricing.free.support": "Community support",
+            "pricing.pro.pages": "5,000 pages/month",
+            "pricing.pro.support": "Priority support",
+            "pricing.business.pages": "50,000 pages/month",
+            "pricing.business.support": "SLA guarantee",
+            "pricing.allTypes": "All extraction types",
+            "pricing.smartParsers": "Smart Parsers included",
+            "pricing.joinWaitlist": "Join Waitlist",
+            "pricing.popular": "Popular",
+            
+            // Waitlist
+            "waitlist.title": "Get early access",
+            "waitlist.subtitle": "Join the waitlist and be the first to know when we launch. Early users get 3 months free Pro plan.",
+            "waitlist.placeholder": "Enter your email",
+            "waitlist.button": "Join Waitlist →",
+            "waitlist.noSpam": "No spam, ever. We'll only email you about pdfpull.",
+            
+            // Footer
+            "footer.contact": "Contact",
+            "footer.rights": "All rights reserved."
+        },
+        de: {
+            // Nav
+            "nav.smartParsers": "Smart Parser",
+            "nav.features": "Funktionen",
+            "nav.pricing": "Preise",
+            "nav.tryIt": "Testen",
+            "nav.joinWaitlist": "Warteliste",
+            
+            // Hero
+            "hero.badge": "🚀 NEU: Rechnungs- & Lebenslauf-Parser mit Mehrsprachigkeit",
+            "hero.title": "Intelligente PDF-Analyse",
+            "hero.subtitle": "für Rechnungen & Lebensläufe",
+            "hero.description": "Extrahieren Sie strukturierte Daten aus Rechnungen und Lebensläufen. Lieferant, Beträge, Daten, Fähigkeiten — alles als sauberes JSON. Unterstützt Englisch, Deutsch & Türkisch.",
+            "hero.tryDemo": "Kostenlos testen →",
+            "hero.seeExamples": "Beispiele ansehen",
+            
+            // Parsers
+            "parsers.title": "Intelligente Dokumenten-Parser",
+            "parsers.subtitle": "PDF hochladen, strukturierte Daten erhalten. So einfach ist das.",
+            "parsers.invoice.title": "Rechnungs-Parser",
+            "parsers.invoice.subtitle": "Lieferant, Beträge, Daten & Positionen extrahieren",
+            "parsers.invoice.tag1": "Lieferant",
+            "parsers.invoice.tag2": "Beträge",
+            "parsers.invoice.tag3": "Daten",
+            "parsers.invoice.tag4": "Steuer-ID",
+            "parsers.resume.title": "Lebenslauf-Parser",
+            "parsers.resume.subtitle": "Kontakt, Fähigkeiten, Erfahrung & Ausbildung extrahieren",
+            "parsers.resume.tag1": "Kontakt",
+            "parsers.resume.tag2": "Fähigkeiten",
+            "parsers.resume.tag3": "Erfahrung",
+            "parsers.resume.tag4": "Ausbildung",
+            "parsers.supports": "🌍 Unterstützt: Englisch, Deutsch, Türkisch",
+            "parsers.tryNow": "Smart Parser jetzt testen →",
+            
+            // Code
+            "code.title": "Ein API-Aufruf, strukturierte Daten",
+            "code.subtitle": "Jede Rechnung mit einer einzigen Anfrage parsen",
+            
+            // Use Cases
+            "useCases.title": "Für echte Anwendungsfälle entwickelt",
+            "useCases.subtitle": "Was Entwickler mit pdfpull bauen",
+            "useCases.expense.title": "Spesenverfolgung",
+            "useCases.expense.desc": "Lieferant, Betrag, Datum aus Belegen automatisch extrahieren. Spesenabrechnungen automatisieren.",
+            "useCases.hr.title": "HR & Recruiting",
+            "useCases.hr.desc": "Lebensläufe in großem Maßstab parsen. Fähigkeiten, Erfahrung, Kontaktdaten für ATS-Systeme.",
+            "useCases.accounting.title": "Buchhaltungs-Automatisierung",
+            "useCases.accounting.desc": "Lieferantenrechnungen automatisch verarbeiten. Positionen, Steuer, Summen extrahieren.",
+            
+            // Features
+            "features.title": "Plus alle Grundfunktionen",
+            "features.subtitle": "Alles, was Sie für PDF-Extraktion brauchen",
+            "features.text.title": "Textextraktion",
+            "features.text.desc": "Gesamten Text mit Seitenauswahl extrahieren",
+            "features.table.title": "Tabellenextraktion",
+            "features.table.desc": "Tabellen als strukturiertes JSON",
+            "features.pdfToImg.title": "PDF zu Bildern",
+            "features.pdfToImg.desc": "Seiten in PNG konvertieren (72-300 DPI)",
+            "features.images.title": "Bilder extrahieren",
+            "features.images.desc": "Eingebettete Bilder mit Metadaten",
+            "features.links.title": "Links extrahieren",
+            "features.links.desc": "Alle URLs aus PDFs abrufen",
+            "features.info.title": "Vollständige PDF-Info",
+            "features.info.desc": "Wortanzahl, Seitenzahl, Metadaten",
+            "features.ocr.title": "OCR-Unterstützung",
+            "features.ocr.desc": "Gescannte Dokumente — Demnächst",
+            "features.fast.title": "Schnell & Zuverlässig",
+            "features.fast.desc": "Powered by PyMuPDF",
+            
+            // Why
+            "why.title": "Warum pdfpull?",
+            "why.noAi.title": "Keine KI-Kosten",
+            "why.noAi.desc": "Regelbasierte Extraktion. Keine GPT-API-Gebühren. Vorhersehbare Preise.",
+            "why.multiLang.title": "Mehrsprachig",
+            "why.multiLang.desc": "Englisch, Deutsch, Türkisch. Weitere Sprachen folgen.",
+            "why.confidence.title": "Konfidenzwert",
+            "why.confidence.desc": "Wissen Sie, wie zuverlässig die Extraktion ist. Zur Überprüfung markieren.",
+            "why.devFirst.title": "Entwickler-First",
+            "why.devFirst.desc": "Einfache REST-API. Gute Dokumentation. Schnelle Integration.",
+            
+            // Pricing
+            "pricing.title": "Einfache, transparente Preise",
+            "pricing.subtitle": "Kostenlos starten, nach Bedarf skalieren",
+            "pricing.perMonth": "/Monat",
+            "pricing.free.name": "Kostenlos",
+            "pricing.free.pages": "100 Seiten/Monat",
+            "pricing.free.support": "Community-Support",
+            "pricing.pro.pages": "5.000 Seiten/Monat",
+            "pricing.pro.support": "Prioritäts-Support",
+            "pricing.business.pages": "50.000 Seiten/Monat",
+            "pricing.business.support": "SLA-Garantie",
+            "pricing.allTypes": "Alle Extraktionstypen",
+            "pricing.smartParsers": "Smart Parser inklusive",
+            "pricing.joinWaitlist": "Zur Warteliste",
+            "pricing.popular": "Beliebt",
+            
+            // Waitlist
+            "waitlist.title": "Frühzeitigen Zugang erhalten",
+            "waitlist.subtitle": "Tragen Sie sich in die Warteliste ein. Frühe Nutzer erhalten 3 Monate Pro-Plan kostenlos.",
+            "waitlist.placeholder": "E-Mail-Adresse eingeben",
+            "waitlist.button": "Zur Warteliste →",
+            "waitlist.noSpam": "Kein Spam. Wir senden nur E-Mails über pdfpull.",
+            
+            // Footer
+            "footer.contact": "Kontakt",
+            "footer.rights": "Alle Rechte vorbehalten."
+        },
+        tr: {
+            // Nav
+            "nav.smartParsers": "Akıllı Ayrıştırıcılar",
+            "nav.features": "Özellikler",
+            "nav.pricing": "Fiyatlar",
+            "nav.tryIt": "Dene",
+            "nav.joinWaitlist": "Bekleme Listesi",
+            
+            // Hero
+            "hero.badge": "🚀 YENİ: Çoklu Dil Destekli Fatura ve CV Ayrıştırıcıları",
+            "hero.title": "Akıllı PDF Ayrıştırma",
+            "hero.subtitle": "Faturalar ve CV'ler için",
+            "hero.description": "Herhangi bir fatura veya CV'den yapılandırılmış veri çıkarın. Satıcı bilgisi, tutarlar, tarihler, yetenekler — hepsi temiz JSON olarak. İngilizce, Almanca ve Türkçe destekler.",
+            "hero.tryDemo": "Ücretsiz Dene →",
+            "hero.seeExamples": "Örnekleri Gör",
+            
+            // Parsers
+            "parsers.title": "Akıllı Belge Ayrıştırıcıları",
+            "parsers.subtitle": "PDF yükle, yapılandırılmış veri al. Bu kadar basit.",
+            "parsers.invoice.title": "Fatura Ayrıştırıcı",
+            "parsers.invoice.subtitle": "Satıcı, tutarlar, tarihler ve kalemleri çıkar",
+            "parsers.invoice.tag1": "Satıcı Bilgisi",
+            "parsers.invoice.tag2": "Tutarlar",
+            "parsers.invoice.tag3": "Tarihler",
+            "parsers.invoice.tag4": "Vergi No",
+            "parsers.resume.title": "CV Ayrıştırıcı",
+            "parsers.resume.subtitle": "İletişim, yetenekler, deneyim ve eğitimi çıkar",
+            "parsers.resume.tag1": "İletişim",
+            "parsers.resume.tag2": "Yetenekler",
+            "parsers.resume.tag3": "Deneyim",
+            "parsers.resume.tag4": "Eğitim",
+            "parsers.supports": "🌍 Desteklenen Diller: İngilizce, Almanca, Türkçe",
+            "parsers.tryNow": "Akıllı Ayrıştırıcıları Dene →",
+            
+            // Code
+            "code.title": "Tek API Çağrısı, Yapılandırılmış Veri",
+            "code.subtitle": "Herhangi bir faturayı tek istekle ayrıştır",
+            
+            // Use Cases
+            "useCases.title": "Gerçek Kullanım Senaryoları İçin",
+            "useCases.subtitle": "Geliştiricilerin pdfpull ile neler yaptığı",
+            "useCases.expense.title": "Gider Takibi",
+            "useCases.expense.desc": "Fiş ve faturalardan satıcı, tutar, tarih otomatik çıkar. Gider raporlarını otomatikleştir.",
+            "useCases.hr.title": "İK ve İşe Alım",
+            "useCases.hr.desc": "CV'leri toplu işle. ATS sistemleri için yetenekler, deneyim, iletişim bilgisi çıkar.",
+            "useCases.accounting.title": "Muhasebe Otomasyonu",
+            "useCases.accounting.desc": "Tedarikçi faturalarını otomatik işle. Kalemler, vergi, toplamları çıkar.",
+            
+            // Features
+            "features.title": "Tüm Temel Özellikler Dahil",
+            "features.subtitle": "PDF çıkarma için ihtiyacınız olan her şey",
+            "features.text.title": "Metin Çıkarma",
+            "features.text.desc": "Sayfa seçimiyle tüm metni çıkar",
+            "features.table.title": "Tablo Çıkarma",
+            "features.table.desc": "Tabloları yapılandırılmış JSON olarak al",
+            "features.pdfToImg.title": "PDF'den Görsele",
+            "features.pdfToImg.desc": "Sayfaları PNG'ye dönüştür (72-300 DPI)",
+            "features.images.title": "Görsel Çıkarma",
+            "features.images.desc": "Gömülü görselleri metadata ile al",
+            "features.links.title": "Link Çıkarma",
+            "features.links.desc": "PDF'lerden tüm URL'leri al",
+            "features.info.title": "Tam PDF Bilgisi",
+            "features.info.desc": "Kelime sayısı, sayfa sayısı, metadata",
+            "features.ocr.title": "OCR Desteği",
+            "features.ocr.desc": "Taranmış belgeler — Yakında",
+            "features.fast.title": "Hızlı ve Güvenilir",
+            "features.fast.desc": "PyMuPDF ile güçlendirildi",
+            
+            // Why
+            "why.title": "Neden pdfpull?",
+            "why.noAi.title": "AI Maliyeti Yok",
+            "why.noAi.desc": "Kural tabanlı çıkarma. GPT API ücreti yok. Öngörülebilir fiyatlar.",
+            "why.multiLang.title": "Çoklu Dil",
+            "why.multiLang.desc": "İngilizce, Almanca, Türkçe desteği. Daha fazlası yakında.",
+            "why.confidence.title": "Güven Skoru",
+            "why.confidence.desc": "Çıkarmanın ne kadar güvenilir olduğunu bilin. İnceleme için işaretle.",
+            "why.devFirst.title": "Geliştirici Öncelikli",
+            "why.devFirst.desc": "Basit REST API. Harika dokümantasyon. Hızlı entegrasyon.",
+            
+            // Pricing
+            "pricing.title": "Basit, şeffaf fiyatlandırma",
+            "pricing.subtitle": "Ücretsiz başla, büyüdükçe ölçekle",
+            "pricing.perMonth": "/ay",
+            "pricing.free.name": "Ücretsiz",
+            "pricing.free.pages": "100 sayfa/ay",
+            "pricing.free.support": "Topluluk desteği",
+            "pricing.pro.pages": "5.000 sayfa/ay",
+            "pricing.pro.support": "Öncelikli destek",
+            "pricing.business.pages": "50.000 sayfa/ay",
+            "pricing.business.support": "SLA garantisi",
+            "pricing.allTypes": "Tüm çıkarma türleri",
+            "pricing.smartParsers": "Akıllı Ayrıştırıcılar dahil",
+            "pricing.joinWaitlist": "Bekleme Listesine Katıl",
+            "pricing.popular": "Popüler",
+            
+            // Waitlist
+            "waitlist.title": "Erken erişim al",
+            "waitlist.subtitle": "Bekleme listesine katılın ve lansmandan ilk siz haberdar olun. Erken kullanıcılar 3 ay ücretsiz Pro plan alır.",
+            "waitlist.placeholder": "E-posta adresinizi girin",
+            "waitlist.button": "Bekleme Listesine Katıl →",
+            "waitlist.noSpam": "Asla spam yok. Sadece pdfpull hakkında e-posta göndeririz.",
+            
+            // Footer
+            "footer.contact": "İletişim",
+            "footer.rights": "Tüm hakları saklıdır."
+        }
+    };
+
+    // Current language
+    let currentLang = localStorage.getItem('pdfpull-lang') || 'en';
+
+    // Set language
+    function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('pdfpull-lang', lang);
+        updateUI();
+    }
+
+    // Update UI with translations
+    function updateUI() {
+        // Update lang buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.lang === currentLang) {
+                btn.classList.add('active');
+            }
+        });
+
+        // Update HTML lang attribute
+        document.documentElement.lang = currentLang;
+
+        // Update all elements with data-i18n attribute
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            if (translations[currentLang][key]) {
+                el.textContent = translations[currentLang][key];
+            }
+        });
+
+        // Update placeholders
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.dataset.i18nPlaceholder;
+            if (translations[currentLang][key]) {
+                el.placeholder = translations[currentLang][key];
+            }
+        });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        updateUI();
+    });
+    </script>
 
 </body>
 </html>
